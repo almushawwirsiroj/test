@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">MyBookApp</string>
+    <string name="new_user_signup">Pengguna Baru ? <b>Ayo Daftarkan</b></string>
+</resources>
