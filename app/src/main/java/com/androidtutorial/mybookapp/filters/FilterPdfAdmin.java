@@ -1,20 +1,24 @@
-package com.androidtutorial.mybookapp;
+package com.androidtutorial.mybookapp.filters;
 
 import android.widget.Filter;
 
-import java.util.ArrayList;
-import java.util.Locale;
+import com.androidtutorial.mybookapp.adapters.AdapterCategory;
+import com.androidtutorial.mybookapp.adapters.AdapterPdfAdmin;
+import com.androidtutorial.mybookapp.models.ModelCategory;
+import com.androidtutorial.mybookapp.models.ModelPdf;
 
-public class FilterCategory extends Filter {
+import java.util.ArrayList;
+
+public class FilterPdfAdmin extends Filter {
     //array list in whick we want to search
-    ArrayList<ModelCategory> filterList;
+    ArrayList<ModelPdf> filterList;
     //adapter in which filter need to ve implemented
-    AdapterCategory adapterCategory;
+    AdapterPdfAdmin adapterPdfAdmin;
 
     //constructor
-    public FilterCategory(ArrayList<ModelCategory> filterList, AdapterCategory adapterCategory) {
+    public FilterPdfAdmin(ArrayList<ModelPdf> filterList, AdapterPdfAdmin adapterPdfAdmin) {
         this.filterList = filterList;
-        this.adapterCategory = adapterCategory;
+        this.adapterPdfAdmin = adapterPdfAdmin;
     }
 
     @Override
@@ -26,10 +30,10 @@ public class FilterCategory extends Filter {
             //change to uppper case, or lower case to avoid case sensitivy
             //ubah ke huruf besar, atau huruf kecil untuk menghindari kepekaan huruf besar
             constraint = constraint.toString().toUpperCase();
-            ArrayList<ModelCategory> filteredModels = new ArrayList<>();
+            ArrayList<ModelPdf> filteredModels = new ArrayList<>();
             for (int i=0; i<filterList.size(); i++){
                 //validasi
-                if (filterList.get(i).getCategory().toUpperCase().contains(constraint)){
+                if (filterList.get(i).getTitle().toUpperCase().contains(constraint)){
                     //add to filteredlist
                     filteredModels.add(filterList.get(i));
                 }
@@ -47,10 +51,10 @@ public class FilterCategory extends Filter {
     @Override
     protected void publishResults(CharSequence constraint, FilterResults results) {
         //apply filter changes
-        adapterCategory.categoryArrayList = (ArrayList<ModelCategory>) results.values;
+        adapterPdfAdmin.pdfArrayList = (ArrayList<ModelPdf>) results.values;
 
          //notify changes
-        adapterCategory.notifyDataSetChanged();
+        adapterPdfAdmin.notifyDataSetChanged();
 
     }
 }

@@ -1,7 +1,5 @@
 package com.androidtutorial.mybookapp;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.androidtutorial.mybookapp.adapters.AdapterCategory;
 import com.androidtutorial.mybookapp.databinding.ActivityDashboardAdminBinding;
+import com.androidtutorial.mybookapp.models.ModelCategory;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

@@ -22,9 +22,11 @@
         <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/layout/activity_login.xml" value="0.2875905797101449" />
         <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/layout/activity_main.xml" value="0.2875905797101449" />
         <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/layout/activity_pdf_add.xml" value="0.338768115942029" />
+        <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/layout/activity_pdf_list_admin.xml" value="0.338768115942029" />
         <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/layout/activity_register.xml" value="0.2875905797101449" />
         <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/layout/activity_splash.xml" value="0.5" />
         <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/layout/row_category.xml" value="0.2773972602739726" />
+        <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/layout/row_pdf_admin.xml" value="0.5" />
         <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/mipmap-anydpi-v26/bagus.xml" value="0.2095" />
         <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/mipmap-anydpi-v26/bagus_round.xml" value="0.2095" />
         <entry key="..\:/Users/UI/AndroidStudioProjects/MyBookApp/app/src/main/res/mipmap-anydpi-v26/ic_launchers.xml" value="0.2085" />

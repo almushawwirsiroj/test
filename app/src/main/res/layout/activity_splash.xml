@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@drawable/backgroundbiru"
+    android:background="@drawable/background4"
     tools:context=".SplashActivity">
 
     <ImageView
@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:text="@string/app_name"
         android:textSize="20sp"
+        android:textColor="#5EB12A"
         android:layout_marginTop="20dp"
         android:fontFamily="sans-serif-black"/>
 

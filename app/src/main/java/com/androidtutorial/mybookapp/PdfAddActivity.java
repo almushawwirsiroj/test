@@ -31,7 +31,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class PdfAddActivity extends AppCompatActivity {
 
@@ -43,7 +42,7 @@ public class PdfAddActivity extends AppCompatActivity {
     private Uri pdfUri = null;
 
     //arraylist to hold pdf categories/ memilih categories yang dibuat setelah menekan tombol arrow bawah
-    private ArrayList<ModelCategory> categoryArrayList;
+    private ArrayList<String> categoryTitleArrayList, categoryIdArrayList;
 
     //tag for debugging
     private static final String TAG = "ADD_PDF_TAG";
@@ -106,7 +105,7 @@ public class PdfAddActivity extends AppCompatActivity {
         });
     }
 
-    private String title= "", description ="", category = "";
+    private String title= "", description ="";
 
     private void validateData() {
         //langkap 1 = validatasi data
@@ -115,7 +114,7 @@ public class PdfAddActivity extends AppCompatActivity {
         //get data
         title = binding.titleEt.getText().toString().trim();
         description = binding.descriptionEt.getText().toString().trim();
-        category = binding.categoryTv.getText().toString().trim();
+
         
         //validasi data
         if (TextUtils.isEmpty(title)){
@@ -124,7 +123,7 @@ public class PdfAddActivity extends AppCompatActivity {
         else if (TextUtils.isEmpty(description)){
             Toast.makeText(this, "Masukkan Deskripsi ...", Toast.LENGTH_SHORT).show();
         }
-        else if (TextUtils.isEmpty(category)){
+        else if (TextUtils.isEmpty(selectedCategoryTitle)){
             Toast.makeText(this, "Pilih Category ...", Toast.LENGTH_SHORT).show();
         }
         else if (pdfUri == null){
@@ -195,7 +194,7 @@ public class PdfAddActivity extends AppCompatActivity {
         hashMap.put("id", ""+timestamp);
         hashMap.put("title", ""+title);
         hashMap.put("desciption", ""+description);
-        hashMap.put("category", ""+category);
+        hashMap.put("categoryId", ""+selectedCategoryId);
         hashMap.put("url", ""+uploadedPdfUrl);
         hashMap.put("timestamp", timestamp);
 
@@ -225,38 +224,47 @@ public class PdfAddActivity extends AppCompatActivity {
 
     private void loadPdfCategories() {
         Log.d(TAG, "loadPdfCategories: Loading pdf Categories.....");
-        categoryArrayList = new ArrayList<>();
+        categoryTitleArrayList = new ArrayList<>();
+        categoryIdArrayList = new ArrayList<>();
 
         //mengambil refernsi dari Categories database
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Categories");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                categoryArrayList.clear();//clear before adding data
+                categoryTitleArrayList.clear();//clear before adding data
+                categoryIdArrayList.clear();
                 for (DataSnapshot ds : snapshot.getChildren()){
-                    //get data
-                    ModelCategory model = ds.getValue(ModelCategory.class);
-                    //add to arraylist
-                    categoryArrayList.add(model);
 
-                    Log.d(TAG, "onDataChange: "+model.getCategory());
+
+                    // get in and title of category
+                    String categoryId = ""+ds.child("id").getValue();
+                    String categoryTitle = ""+ds.child("category").getValue();
+
+                    //add to respective array list
+                    categoryTitleArrayList.add(categoryTitle);
+                    categoryIdArrayList.add(categoryId);
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+
+
             }
         });
     }
 
+    //selected category id and category title
+    private String selectedCategoryId, selectedCategoryTitle;
     private void categoryPickDialog() {
         Log.d(TAG, "categoryPickDialog: showing category pick dialog");
 
         //get stirng array of categores from arraylist
-        String[] categoriesArray = new String[categoryArrayList.size()];
-        for (int i=0; i<categoryArrayList.size(); i++){
-            categoriesArray[i] = categoryArrayList.get(i).getCategory();
+        String[] categoriesArray = new String[categoryTitleArrayList.size()];
+        for (int i = 0; i< categoryTitleArrayList.size(); i++){
+            categoriesArray[i] = categoryTitleArrayList.get(i);
         }
 
         //alert dilaog
@@ -267,10 +275,12 @@ public class PdfAddActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         //handle item clik
                         //get clik item form/dapatkan item yang diklik dari daftar
-                        String category = categoriesArray[which];
-                        binding.categoryTv.setText(category);
+                        selectedCategoryTitle = categoryTitleArrayList.get(which);
+                        selectedCategoryId = categoryIdArrayList.get(which);
+                        //set to category textview
+                        binding.categoryTv.setText(selectedCategoryTitle);
 
-                        Log.d(TAG, "onClick: Selected Category"+category);
+                        Log.d(TAG, "onClick: Selected Category"+selectedCategoryId+""+selectedCategoryTitle);
                     }
                 })
                 .show();

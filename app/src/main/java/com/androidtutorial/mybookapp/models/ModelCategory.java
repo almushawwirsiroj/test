@@ -1,4 +1,4 @@
-package com.androidtutorial.mybookapp;
+package com.androidtutorial.mybookapp.models;
 
 import com.google.firebase.database.Exclude;
 

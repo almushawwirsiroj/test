@@ -1,6 +1,7 @@
-package com.androidtutorial.mybookapp;
+package com.androidtutorial.mybookapp.adapters;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.content.Context;
@@ -15,6 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.androidtutorial.mybookapp.PdfListAdminActivity;
+import com.androidtutorial.mybookapp.filters.FilterCategory;
+import com.androidtutorial.mybookapp.models.ModelCategory;
 import com.androidtutorial.mybookapp.databinding.RowCategoryBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -85,6 +89,18 @@ public class AdapterCategory extends  RecyclerView.Adapter<AdapterCategory.Holde
                         .show();
             }
         });
+
+        //handel tombol , go to pdflistadminactivity, also pass pdf category and cateogry id
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PdfListAdminActivity.class);
+                intent.putExtra("categoryId", id);
+                intent.putExtra("categoryTitle", category);
+                context.startActivity(intent);
+
+            }
+        });
     }
 
     private void deleteCategory(ModelCategory model, HolderCategory holder) {
@@ -106,6 +122,9 @@ public class AdapterCategory extends  RecyclerView.Adapter<AdapterCategory.Holde
 
                     }
                 });
+
+
+
     }
 
     @Override
